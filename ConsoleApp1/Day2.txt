@@ -1,0 +1,45 @@
+Multi-Threading in .NET 
+- Threads are light-weight process 
+- Allocated time slices by the OS 
+- Threads created by the OS 
+--> Thread Lifecycle
+- New
+- Ready  (Scheduled for execution) 
+- Running
+- Wait-Sleep-Join 
+- Terminated
+--> AbortRequested
+	- Aborted
+
+- System.Threading namespace 
+- Thread class. 
+-> represents the physical OS thread 
+-> Physical thread is created when the logical .NET thread 
+	starts 
+--> allocates time slices 
+-- Threads run in a perfectly chaotic manner 
+-- Synchronization is required when multiple threads access shared resources
+-- Thread can be foreground (default) or background 
+- Threads executes a task (function) 
+- Tasks or functions are assigned using ThreadStart or ParameterizedThreadStart delegate
+- ThreadPriority can be set to influence the OS scheduler 
+	- Lowest, BelowNormal, Normal, AboveNormal, Highest
+
+Synchronization 
+1. Object level sync
+  - lock the object and sync access to it. 
+  - Value type object are sync using Interlocked class 
+  - Reference type objects are synced using Monitor class or the lock keyword
+2. Process level sync
+  - Mutex and Semaphore are used to sync across processes,
+		sync access to critical section resources
+  - named Mutex and Named Semaphore can be used to sync across processes
+  - Mutex does not support concurrency, Semaphore supports controlled concurrency
+3. ReaderWriterLockSlim
+  - allows multiple readers or exclusive writer
+  - improves performance when reads are more frequent than writes
+4. CLR level sync 
+ - [MethodImpl(MethodImplOptions.Synchronized)] attribute can be used to sync method access
+ - locks the instance for instance methods and locks the type for static methods
+5. Thread level Sync [ Producer-Consumer scenario ]
+ - ResetEvent types in .NET [ AutoResetEvent - signalled multiple times, ManualResetEvent - signalled once ]

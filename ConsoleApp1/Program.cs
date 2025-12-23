@@ -34,6 +34,11 @@ namespace ConsoleApp1
             var (productName, productId) = prd;
             Console.WriteLine($"{productId}, {productName}");
 
+            Console.WriteLine("==============================================================");
+            //ThreadExample1.Test(); 
+            //ThreadSync.Test();
+            ResetEventSynch.Test();
+
 
             /*string email = "someone@example.com";
             bool status = AppExtensions.IsValid(email);
