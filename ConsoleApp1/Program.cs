@@ -42,7 +42,8 @@ namespace ConsoleApp1
             //await ParallelProgramming.Test();
             //ReflectionExample.Test();
             //            ReflectionExample.TestDynamicAssembly();
-            MEFClient.Test();
+            //MEFClient.Test();
+            MEFClient.TestPlugIns();
             /*string email = "someone@example.com";
             bool status = AppExtensions.IsValid(email);
             if (status)
