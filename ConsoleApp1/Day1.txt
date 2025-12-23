@@ -1,0 +1,186 @@
+1. Extension Methods 
+2. yield statement and IEnumerable/IEnumerator interfaces
+3. Lambda Expressions
+4. LINQ Operators 
+5. Reflection 
+6. Multi-threading and Parallel programming 
+7. Managed Extensibility Framework (MEF) 
+8. Delegates and Events and Built_in Delegates 
+
+
+Extension Methods 
+class Parent { 
+	virtual void Execute() { } 
+	abstract void DoEvents(); 
+}
+class Child : Parent { 
+	override void Execute() { } 
+	override void DoEvents() { } //ADDED BEHAVIOR
+}
+
+class X { void DoWork(Child c) { c.Execute(); c.DoEvents(); } } 
+
+class X { void DoWork(Parent c) { c.Execute(); c.DoEvents(); } } // BREAKS
+
+
+string email = "someone@example.com"; 
+if(email.IsValidConstruct()) { 
+}
+
+class EmailString: String { 
+	bool IsValidConstruct() => true; 
+} 
+
+.NET String is sealed - not inheritable 
+
+EmailString email = 
+
+Utilities class 
+-> static bool IsValidConstruct(string input) { return input.Contains("@"); } 
+
+if(Utilities.IsValidConstruct(email)) { .... } 
+
+email.Contains("@"); =>   Contains(string this=email, criteria="@")  { this.email.Length; } 
+
+--> static class 
+	-> static methods 
+		-> the first parameter takes a "this" argument 
+
+public static class AppExtensions { 
+	public static bool IsValid(this Parent input) { return input.Contains("@"); } 
+	//// other extensions 
+} 
+
+
+string x = "a"; 
+if(x.IsValid())  { } 
+
+//COMPILER 
+if(AppExtensions.IsValid(x)) { .. } 
+
+
+
+2. IEnumerable/IEnumerator and yield patterns
+
+IEnumerable -> GetEnumerator(); 
+IEnumerator -> MoveNext(),Current, Reset()
+
+
+List<string> names=new List<string>{"A", "B", "C"}; 
+foreach(var name in names) { C.WL(name); } 
+==> COMPILER 
+IEnumerator ie = names.GetEnumerator(); //List<T> implements IEnumerable interface 
+while(ie.MoveNext()) { 
+	object x = ie.Current; 
+	C.WL(x); 
+} 
+
+3. Delegates and Events 
+-- Events are notifications of an action 
+-- Notification requires a publisher(notifier) and a subscriber (listening/waiting)
+
+-- Provide extensibility points in our application - defer app algorithm/logic to the user 
+-- Plug-n-Play model (Pub-Sub Model) 
+-- dynamically add/remove code blocks (chat)
+-- true runtime polymorphism (late binding) 
+-- pass functions as arguments to another function 
+
+-> System.Delegate represents a function pointer in .NET 
+-- stores the address of the target function 
+-- POinter constructs are managed by the Runtime/CLR, not by the user 
+-- System.UnicastDelegate (invokes one function) and System.MulticastDelegate (multiple functions)
+-- All custom delegates in .NET are types of System.MulticastDelegate 
+-- Steps: 1. Declaration, 2. Instantation, and 3. Invocation 
+
+Step 1: Declaration 
+-- delegates are declared like functions in .NET 
+-- [access specifiers] [modifiers] delegate [returnType] Identifier([<arg_list>]); 
+Ex: public delegate void MyDelegate(string name);  
+COMPILER: converts to 
+	public class MyDelegate : System.MulticastDelegate 
+	{
+		ctor(object obj, NativeInt functionAddressPointer) { }  
+		public void Invoke(string name) { /*Impl deferred to the CLR*/ }
+		public IAsyncResult BeginInvoke(string name, AsyncCallback cb, object state) 
+		{ /*Impl deferred to the CLR*/ }
+		public void EndInvoke(IAsyncResult iar) { /*Impl deferred to the CLR*/ }
+	}
+
+Step 2: Instantiation 
+-- fetch the address of the called function 
+	IL Opcodes 1. CALL, 2. CALLVIRT, 3. LDFTN 
+-- pass the address of the target function as a parameter to the constructor of the Delegate object 
+Ex: public static void Show(string name) { } //Function matches with the delegate signature 
+    public void Instance(string name) { } 
+    MyDelegate md = new MyDelegate(Show); => new MyDelegate(null, &ClassName.Show); 
+    C1 obj= new C1(); 
+    MyDelegate md2 = new MyDelegate(obj.Show); => new MyDelegate(obj, &Show); 
+
+Step 3: Invocation 
+-- two approaches
+	- md("ABB"); 	    => compiler converts to md.Invoke("ABB");
+	- md.Invoke("ABB"); 
+	
+
+LINQ 
+- Language Integrated Query 
+- query different types of collections uniformly 
+	- Object based collections -> Stack, Queues, Lists, Hashtables, Dictionary... 
+	- DOM collections- HTML 
+	- XML collections -> XMLDOM, XElement 
+	- Database SQL based collections [ SQL, ] 
+
+--> LINQ to Objects 
+--> LINQ to XML 
+--> LINQ to SQL -> SQL vendor 
+--> LINQ to Entities -> EntityFramework 
+
+--> based on extension methods, inheritance, interfaces, generics, delegates, lambda expressions, built-in delegates 
+
+Query based syntax 
+	-> from x in collection where criteria order by field select x; 
+	-> deferred execution-> created and invoked when called by foreach or other extracting constructs
+	-> have limitation - partitioning cannot be done, conversion not supported fully, aggregations  
+
+Method based syntax
+	-> dot notation 
+	-> collection.Where(predicate).OrderBy(action).Select(Func); 
+	
+LINQ Operators 
+1. Projection Operators 	-> Select, SelectMany, .... 
+2. Restriction Operators 	-> Where 
+3. Sorting Operators		-> OrderBy, OrderByDescending, ThenBy, ThenByDescending 
+4. Partition Operators		-> Take, Skip, TakeWhile, SkipWhile,  
+5. Element Operators 		-> First, Last, ElementAt, FirstOrDefault, LastOrDefault, ... 
+6. Aggregation Operators	-> Count, Sum, Max, Min, Average, ... 
+7. Grouping Operators		-> GroupBy 
+8. Conversion Operators		-> ToList, ToDictionary, ToArray, Cast 
+9. Quantifier Operators		-> Any, All, Contains, ... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
