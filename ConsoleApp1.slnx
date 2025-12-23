@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="AccountsPlugIn/AccountsPlugIn.csproj" Id="4f1e011a-8780-449e-8a76-3d82de23745c" />
   <Project Path="ConsoleApp1/ConsoleApp1.csproj" />
+  <Project Path="MEFInterfaceLibrary/MEFInterfaceLibrary.csproj" Id="b3a5a66f-1770-4bfa-bbf5-39a1cf9d0338" />
+  <Project Path="ProductPlugin/ProductPlugin.csproj" Id="d1235fa5-cb9c-4283-8a1f-d9d0c1d1666d" />
 </Solution>

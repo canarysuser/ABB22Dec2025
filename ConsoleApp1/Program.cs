@@ -40,9 +40,9 @@ namespace ConsoleApp1
             // ResetEventSynch.Test();
             //TaskBasedProgramming.Test();
             //await ParallelProgramming.Test();
-            ReflectionExample.Test();
-                        ReflectionExample.TestDynamicAssembly();
-
+            //ReflectionExample.Test();
+            //            ReflectionExample.TestDynamicAssembly();
+            MEFClient.Test();
             /*string email = "someone@example.com";
             bool status = AppExtensions.IsValid(email);
             if (status)

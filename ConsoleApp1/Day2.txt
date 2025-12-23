@@ -71,3 +71,16 @@ Reflection
 - System.Reflection.Emit namespace is used to create types dynamically at runtime
 - MemberInfo is the base class for  MethodInfo, PropertyInfo, FieldInfo, EventInfo, ConstructorInfo classes
 
+Managed Extensibility Framework (MEF)
+- Used to create extensible applications
+- Allows to discover and use extensions without configuration
+- System.ComponentModel.Composition namespace
+- Uses attributes to mark parts and their dependencies
+- [Export] attribute to mark a class as a part
+- [Import] attribute to mark a dependency on a part
+- [ImportMany] attribute to mark a dependency on multiple parts
+- CompositionContainer class to compose parts and satisfy dependencies
+- Catalogs are used to discover parts (AssemblyCatalog, DirectoryCatalog)
+- MEF supports both attributed programming model and convention based programming model
+- MEF supports recomposition of parts at runtime
+
