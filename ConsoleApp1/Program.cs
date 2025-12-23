@@ -12,7 +12,7 @@ namespace ConsoleApp1
             public string City { get; init; } = "Bengaluru";
         }; 
 
-        static void Main()
+        async static Task Main()
         {
             var p1 = new Person("ABB", "Bengaluru");
             var p2 = new Person("ABB", "Bengaluru");
@@ -37,8 +37,11 @@ namespace ConsoleApp1
             Console.WriteLine("==============================================================");
             //ThreadExample1.Test(); 
             //ThreadSync.Test();
-            ResetEventSynch.Test();
-
+            // ResetEventSynch.Test();
+            //TaskBasedProgramming.Test();
+            //await ParallelProgramming.Test();
+            ReflectionExample.Test();
+                        ReflectionExample.TestDynamicAssembly();
 
             /*string email = "someone@example.com";
             bool status = AppExtensions.IsValid(email);

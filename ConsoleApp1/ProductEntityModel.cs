@@ -32,7 +32,7 @@ namespace ConsoleApp1
             //optionsBuilder.LogTo(Console.WriteLine);
             optionsBuilder.UseSqlServer(
                 "server=.;database=northwind;integrated security=sspi;trustservercertificate=true"
-                ).LogTo(Console.Write);
+                );//.LogTo(Console.Write);
            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

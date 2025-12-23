@@ -43,3 +43,31 @@ Synchronization
  - locks the instance for instance methods and locks the type for static methods
 5. Thread level Sync [ Producer-Consumer scenario ]
  - ResetEvent types in .NET [ AutoResetEvent - signalled multiple times, ManualResetEvent - signalled once ]
+
+
+Task Parallel Programming
+- Tasks are logical units of work
+- Task is a higher level abstraction over threads
+- Task thread pool manages the threads for executing tasks
+- TPL and Data Parallelism are used for parallel programming
+- Data Parallelism is achieved using Parallel class and PLINQ
+	- from item in collection.AsParallel() select item
+- Parallel class provides Parallel.For, Parallel.ForEach and Parallel.Invoke methods
+- Task class provided by the System.Threading.Tasks namespace 
+- Tasks can be created using Task.Run, Task.Factory.StartNew methods 
+- Tasks can be chained using ContinueWith method
+- Tasks are scheduled using TaskScheduler class
+- Tasks can be waited using Task.WaitAll, Task.WaitAny methods
+- Tasks can also be cancelled using CancellationToken
+- Tasks are background by default, as it is pulled from the .NET ThreadPool 
+
+Reflection 
+- Run time type information 
+- information about assemblies, modules, types, members 
+- System.Reflection namespace
+- System.Type class is the metaclass in .NET 
+- allows to inspect types at runtime, query types, create instances dynamically, invoke methods dynamically
+- Activator class is used to create instances dynamically
+- System.Reflection.Emit namespace is used to create types dynamically at runtime
+- MemberInfo is the base class for  MethodInfo, PropertyInfo, FieldInfo, EventInfo, ConstructorInfo classes
+
